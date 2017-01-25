@@ -10,12 +10,19 @@ Python 3 installed.
 
 ## Installation
 
+```
 git clone git@github.com:scottfabini/machine-learning-perceptron.git
 cd machine-learning-perceptron
+```
+Download mnist training and test data to this directory from:
+http://web.cecs.pdx.edu/~mm/MachineLearningWinter2017/mnist_train.csv
+http://web.cecs.pdx.edu/~mm/MachineLearningWinter2017/mnist_test.csv
+```
 python3 -m pip install numpy
 python3 -m pip install scipy
 python3 -m pip install scikit-learn
 python3 Main.py 
+```
 
 ## License
 
