@@ -5,7 +5,7 @@ class Parser:
         inputs = []
         bias_input = 1.0
         for i, line in enumerate(f):
-            #if i > 100: break #for debug, limits number of images to process
+            if i > 1000: break #for debug, limits number of images to process
             line = line.strip().split(',')
             line = [int(x) for x in line]
             outputs.append(line[0])
