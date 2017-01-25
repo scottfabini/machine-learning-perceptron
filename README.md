@@ -4,7 +4,8 @@ Machine Learning using a perceptron with 784 inputs (corresponding to 28x28
 image from MNIST dataset) and 10 output classifiers (corresponding to digits
 0-9).
 
-Confusion Matrix showing correlation between target and actual results. High numbers on diagonal indicate correct classification.  ![alt tag](http://web.cecs.pdx.edu/~sfabini/img/confusion_matrix.png)
+Confusion Matrix showing correlation between target and actual results. High numbers on diagonal indicate correct classification.<br>
+![alt tag](http://web.cecs.pdx.edu/~sfabini/img/confusion_matrix.png)
 
 # Requirements
 
