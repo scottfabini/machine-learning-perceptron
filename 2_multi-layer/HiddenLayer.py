@@ -1,5 +1,5 @@
 from random import uniform
-import HiddenClassifier
+from HiddenClassifier import HiddenClassifier
 import numpy as np
 import math
 
@@ -8,7 +8,7 @@ class HiddenLayer:
     def __init__(self, layer_size, input_size, learning_rate, momentum, previous_layer):
         self.layer_size = layer_size
         self.classifiers = [HiddenClassifier(input_size, learning_rate, momentum) for _ in range(layer_size)]
-        self.errors = [0 for _ in range(layer_size)]
+        self.errors = [0] * layer_size
         self.previous_layer = previous_layer
         self.next_layer = None
 

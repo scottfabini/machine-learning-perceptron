@@ -1,11 +1,12 @@
 class Parser:
-    def parse_file(self, input_filename):
+    def parse_file(self, input_filename, max_inputs_to_parse):
         f = open(input_filename, 'r')
         outputs = []
         inputs = []
         bias_input = 1.0
         for i, line in enumerate(f):
-            if i > 100: break #for debug, limits number of images to process
+            if i > max_inputs_to_parse:
+                break #for debug, limits number of images to process
             line = line.strip().split(',')
             line = [int(x) for x in line]
             outputs.append(line[0])
