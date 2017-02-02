@@ -1,6 +1,6 @@
 ## Synopsis
 
-Machine Learning using a perceptron with 784 inputs (corresponding to 28x28
+Machine Learning using a multi-layer neural network with 784 inputs (corresponding to 28x28
 image from MNIST dataset) and 10 output classifiers (corresponding to digits
 0-9).
 
@@ -15,7 +15,7 @@ Python 3 installed.
 
 ```
 git clone git@github.com:scottfabini/machine-learning-perceptron.git
-cd machine-learning-perceptron
+cd machine-learning-perceptron/2_multi-layer
 ```
 Download mnist training and test data to this directory from:
 http://web.cecs.pdx.edu/~mm/MachineLearningWinter2017/mnist_train.csv
