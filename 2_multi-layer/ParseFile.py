@@ -1,3 +1,5 @@
+import numpy as np
+
 class Parser:
     def parse_file(self, input_filename, max_inputs_to_parse):
         f = open(input_filename, 'r')
@@ -10,11 +12,10 @@ class Parser:
             line = line.strip().split(',')
             line = [int(x) for x in line]
             outputs.append(line[0])
-            inputs.append(line[1:])
-            inputs[i] = [x/255 for x in inputs[i]]
+            inputs.append(np.array(line[1:]))
+            inputs[i] = list([x/255 for x in inputs[i]])
             inputs[i].insert(0, bias_input)
-
-        return inputs, outputs
+        return np.array(inputs), np.array(outputs)
 
 
 

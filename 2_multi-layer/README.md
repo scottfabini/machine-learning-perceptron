@@ -1,8 +1,8 @@
 ## Synopsis
 
 Machine Learning using a multi-layer neural network with 784 inputs (corresponding to 28x28
-image from MNIST dataset) and 10 output classifiers (corresponding to digits
-0-9).
+image from MNIST dataset), a configurable number of classifiers in hidden
+layer, and 10 output classifiers (corresponding to digits 0-9).
 
 Confusion Matrix showing correlation between target and actual results. High numbers on diagonal indicate correct classification.<br>
 ![alt tag](http://web.cecs.pdx.edu/~sfabini/img/confusion_matrix.png)
@@ -25,6 +25,13 @@ python3 -m pip install numpy
 python3 -m pip install scipy
 python3 -m pip install scikit-learn
 python3 Main.py 
+```
+
+## Operation
+
+```
+python3 Main.py [-n <hidden_layer_size=20>] [-o <output_layer_size=10>] [-m <momentum=0.9>] [-l
+<learning rate=0.1>] [-e <epochs=50>]
 ```
 
 ## License

@@ -5,6 +5,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 import getopt
 import numpy as np
+np.set_printoptions(threshold=np.nan)
 
 
 class Main:
@@ -17,7 +18,7 @@ class Main:
         except getopt.GetoptError:
             print('Main.py -n <hidden layer size> -o <output layer size> -m <momentum> -l <learning rate> -e <epochs>')
             sys.exit(2)
-        hidden_layer_size = 20
+        hidden_layer_size = 50
         output_layer_size = 10
         momentum = 0.9
         learning_rate = 0.1
@@ -26,21 +27,22 @@ class Main:
         max_test_inputs = 100
         for opt, arg in opts:
             if opt == '-h':
-                print('Main.py -n <hidden layer size> -o <output layer size> -m <momentum> -l <learning_rate> -e <epochs>')
+                print('Main.py -n <hidden layer size> -o <output layer size> '
+                      '-m <momentum> -l <learning_rate> -e <epochs>')
                 sys.exit()
-            elif opt in ("-n"):
+            elif opt in "-n":
                 hidden_layer_size = arg
-            elif opt in ("-o"):
+            elif opt in "-o":
                 output_layer_size = arg
-            elif opt in ("-m"):
+            elif opt in "-m":
                 momentum = arg
-            elif opt in ("-l"):
+            elif opt in "-l":
                 learning_rate = arg
-            elif opt in ("-e"):
+            elif opt in "-e":
                 epochs = arg
-            elif opt in ("--max-train"):
+            elif opt in "--max-train":
                 max_train_inputs = arg
-            elif opt in ("--max-test"):
+            elif opt in "--max-test":
                 max_test_inputs = arg
 
         # parse input files
@@ -77,7 +79,6 @@ class Main:
         # begin learning
         print('Begin Learning With Learning Rate: {0}'.format(learning_rate))
         for epoch in range(epochs):
-            # get training predictions
             for i in range(number_of_training_images):
                 training_prediction_vectors[i] = network.get_output(training_images[i])
                 training_predictions[i] = self.vector_to_numeric(training_prediction_vectors[i])
@@ -87,7 +88,7 @@ class Main:
 
             # get test predictions
             for i in range(number_of_test_images):
-                test_prediction_vectors[i] = network.get_output(test_images[i])
+                test_prediction_vectors[i] = network.get_output(np.array(test_images[i]))
                 test_predictions[i] = self.vector_to_numeric(test_prediction_vectors[i])
             test_accuracy = accuracy_score(test_targets, test_predictions) * 100
             test_accuracies.append(test_accuracy)
@@ -100,12 +101,18 @@ class Main:
 
             # train based on predictions vs. targets
             for i in range(number_of_training_images):
-                if training_predictions[i] != training_targets[i]:
+                # print('prediction: {0}'.format(training_predictions[i]))
+                # print('target: {0}'.format(training_targets[i]))
+                #if training_predictions[i] != training_targets[i]:
                     training_target_vector = self.numeric_to_vector(training_targets[i])
+
                     network.train(training_images[i], training_target_vector)
 
+            #network.reset_for_epoch()
+
             # break out of epoch loop if training accuracy > 80% and delta is small
-            if abs(previous_epoch_training_accuracy - training_accuracy) <= 1.0:
+            # if abs(previous_epoch_training_accuracy - training_accuracy) <= 1.0:
+            if training_accuracy > 70 and abs(previous_epoch_training_accuracy - training_accuracy) <= 1.0:
                 break
 
         # display final results
@@ -146,7 +153,7 @@ class Main:
     def numeric_to_vector(self, numeric):
         vector = ([0.1]*10)
         vector[numeric] = 0.9
-        return vector
+        return np.array(vector)
 
 if __name__ == "__main__":
     sys.exit(Main().main(sys.argv))

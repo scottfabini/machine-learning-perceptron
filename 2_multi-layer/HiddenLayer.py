@@ -8,31 +8,22 @@ class HiddenLayer:
     def __init__(self, layer_size, input_size, learning_rate, momentum, previous_layer):
         self.layer_size = layer_size
         self.classifiers = [HiddenClassifier(input_size, learning_rate, momentum) for _ in range(layer_size)]
-        self.errors = [0] * layer_size
+        self.errors = np.zeros(layer_size)
         self.previous_layer = previous_layer
-        self.next_layer = None
-
-    def get_outputs_and_backpropagate(self, inputs_, target):
-        outputs = self.get_outputs(inputs_)
-        self.update_weights(inputs_, outputs, target)
-        if self.previous_layer is not None:
-            #should these inputs be the previous layers inputs?
-            self.previous_layer.update_weights(inputs_, outputs, target)
-        return outputs
 
     def get_outputs(self, inputs_):
         return [classifier.get_output(inputs_) for classifier in self.classifiers]
 
-    def update_weights(self, inputs_, outputs, targets):
+    def update_weights(self, inputs_, errors):
+        for idx, classifier in enumerate(self.classifiers):
+            classifier.update_weights(inputs_, errors[idx])
+
+    def get_errors(self, outputs, weights_matrix, output_errors):
+        for idx, classifier in enumerate(self.classifiers):
+            self.errors[idx] = classifier.error(outputs[idx], weights_matrix[:, idx], output_errors)
+        return np.array(self.errors)
+
+    def reset_previous_weight_changes(self):
         for classifier in self.classifiers:
-            classifier.update_weights(inputs_, self.get_errors(outputs, targets))
-
-    def get_errors(self, outputs):
-        for idx in range(self.layer_size):
-            self.errors[idx] = outputs[idx] * (1 - outputs[idx]) \
-                               * np.dot(self.next_layer.get_weights_matrix(), self.next_layer.get_errors())
-
-    def set_next_layer(self, next_layer):
-        self.next_layer = next_layer
-
+            classifier.reset_previous_weight_changes()
 

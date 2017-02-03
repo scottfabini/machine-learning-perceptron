@@ -9,5 +9,5 @@ class OutputClassifier(Classifier):
         Classifier.__init__(self, input_size, learning_rate, momentum)
 
     def error(self, output, target):
-        self.error = output * (1 - output) * (target - output)
+        return output * (1 - output) * (target - output)
 
