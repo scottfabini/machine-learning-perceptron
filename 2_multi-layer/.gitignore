@@ -5,5 +5,4 @@ report/
 accuracies.csv
 confusion.txt
 submit/
-mnist_test.csv
-mnist_train.csv
+*.csv
