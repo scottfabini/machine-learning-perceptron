@@ -9,7 +9,7 @@ https://archive.ics.uci.edu/ml/datasets/Spambase
 """
 
 import pandas as pd
-import numpy as np
+import numpy as numpy
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import sklearn.preprocessing
@@ -19,6 +19,7 @@ import sklearn.metrics
 import sklearn.svm
 import random
 import sys
+numpy.set_printoptions(threshold=numpy.nan)
 
 
 class Main:
@@ -45,8 +46,8 @@ class Main:
         X_train_norm = scaler.fit_transform(X_train)
         X_test_norm = scaler.transform(X_test)
 
-        print(np.shape(X_train_norm))
-        print(np.shape(y_train))
+        print(numpy.shape(X_train_norm))
+        print(numpy.shape(y_train))
         # Initialize SVM
         clf = sklearn.svm.SVC(kernel="linear")
         # Train SVM using training data
@@ -109,8 +110,8 @@ class Main:
                     X_test_norm_subset = X_test_norm[:, 0]
                 else:
                     # TODO: This subset generation via column_stack is very inefficient.
-                    X_train_norm_subset = np.column_stack((X_train_norm_subset, X_train_norm[:, i]))
-                    X_test_norm_subset = np.column_stack((X_test_norm_subset, X_test_norm[:, i]))
+                    X_train_norm_subset = numpy.column_stack((X_train_norm_subset, X_train_norm[:, i]))
+                    X_test_norm_subset = numpy.column_stack((X_test_norm_subset, X_test_norm[:, i]))
                 y_train_subset = y_train
 
 
@@ -178,8 +179,8 @@ class Main:
                 else:
                     i = random.randrange(57)
                     # TODO: This subset generation via column_stack is very inefficient.
-                    X_train_norm_subset = np.column_stack((X_train_norm_subset, X_train_norm[:, i]))
-                    X_test_norm_subset = np.column_stack((X_test_norm_subset, X_test_norm[:, i]))
+                    X_train_norm_subset = numpy.column_stack((X_train_norm_subset, X_train_norm[:, i]))
+                    X_test_norm_subset = numpy.column_stack((X_test_norm_subset, X_test_norm[:, i]))
                 y_train_subset = y_train
 
             # Reinitialize SVM
