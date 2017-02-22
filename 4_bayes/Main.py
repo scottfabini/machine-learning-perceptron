@@ -71,51 +71,7 @@ class Main:
 
         print(sklearn.metrics.classification_report(class_prediction, y_train))
         print(sklearn.metrics.confusion_matrix(class_prediction, y_train))
-        ''' 
-        print([X_train_row for X_train_row in X_train])
-
-        print(list(X_train.iloc[0]))
-        print(list(X_train.iloc[1]))
-        print(list(X_train.iloc[2]))
-
-        test = [[1 / (std * math.sqrt(2 * math.pi)) * math.exp(-(xi - mean)**2 / (2 * std **2)) \
-            for mean, std, xi in zip(X_means_given_one, X_std_given_one, X_train_row)] for X_train_row in X_train]
         
-        #print([xi_given_class for xi_given_class in probability_x_given_class_is_zero if xi_given_class != 0])
-        '''
-        '''
-        [ numpy.argmax( math.log())for i in range(57)]
-        # Normalize the data by scaling to the training data
-        #scaler = sklearn.preprocessing.StandardScaler().fit(X_train)
-        X_train_norm = X_train
-        X_test_norm = X_test
-
-        #print(numpy.shape(X_train_norm))
-        #print(numpy.shape(y_train))
-        # Initialize SVM
-        #clf = sklearn.svm.SVC(kernel="linear")
-        # Train SVM using training data
-        clf.fit(X_train_norm, y_train)
-
-        # Classify the test data using the SVM.
-        # Score is a weighted classification. Predict is 0/1 classification.
-        y_score = clf.decision_function(X_test_norm)
-        y_predict = clf.predict(X_test_norm)
-
-        # Print results
-        print("Accuracy Score:")
-        print(sklearn.metrics.accuracy_score(y_test, y_predict))
-        print("Precision Score:")
-        print(sklearn.metrics.precision_score(y_test, y_predict))
-        print("Recall Score:")
-        print(sklearn.metrics.recall_score(y_test, y_predict))
-        print("\n\n\n")
-
-        print("Confusion Matrix:")
-        print(sklearn.metrics.confusion_matrix(y_test, y_predict))
-        print("\n\n\n")
-
-        '''
         return None
 
 if __name__ == "__main__":
